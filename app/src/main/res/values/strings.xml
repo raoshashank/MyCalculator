@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">MyCalculator</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sqr_root">√</string>
+    <string name="plus_minus">±</string>
+    <string name="divide">÷</string>
+    <string name="backspace">⌫</string>
+
+</resources>
