@@ -14,25 +14,30 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.util.Stack;
 
 public class MainActivity extends AppCompatActivity{
-    EditText result_tv;
+    TextView result_tv,op_tv;
     String op;
     StringBuilder s;
-    int temp;
+    int temp,res;
     public String str="",str2="";
-    Button one,two,three,four,five,six,seven,eight,nine,zero,floater,clear,divide,multiply,subtract,plus,sqroot,backspace,equal,plusminus;
+    Button one,two,three,four,five,six,seven,eight,nine,zero,floater,clear,divide,multiply,subtract,plus,sqroot,equal,plusminus;
+    ImageButton backspace ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        res=0;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-         result_tv = (EditText)findViewById(R.id.result_tv);
+         result_tv = (TextView) findViewById(R.id.result_tv);
+        op_tv = (TextView)findViewById(R.id.operator_View);
         clear = (Button)findViewById(R.id.cancel);
         divide = (Button)findViewById(R.id.divide);
         multiply = (Button)findViewById(R.id.multiply);
@@ -51,7 +56,7 @@ public class MainActivity extends AppCompatActivity{
         plus = (Button)findViewById(R.id.add);
         sqroot = (Button)findViewById(R.id.sqr_root);
         equal = (Button)findViewById(R.id.equalto);
-        backspace = (Button)findViewById(R.id.backspace);
+        backspace = (ImageButton)findViewById(R.id.backspace);
         floater = (Button)findViewById(R.id.floater);
 
 try {
@@ -67,6 +72,8 @@ try {
         @Override
         public void onClick(View view) {
             op = "/";
+            if(op_tv.getText().toString().isEmpty())
+                op_tv.setText(op);
             temp = 1;
         }
     });
@@ -74,6 +81,8 @@ try {
         @Override
         public void onClick(View view) {
             op = "*";
+            if(op_tv.getText().toString().isEmpty())
+                op_tv.setText(op);
             temp = 1;
 
         }
@@ -82,6 +91,8 @@ try {
         @Override
         public void onClick(View view) {
             op = "-";
+            if(op_tv.getText().toString().isEmpty())
+                op_tv.setText(op);
             temp = 1;
 
 
@@ -91,6 +102,8 @@ try {
         @Override
         public void onClick(View view) {
             op = "+";
+            if(op_tv.getText().toString().isEmpty())
+                op_tv.setText(op);
             temp = 1;
         }
     });
@@ -215,6 +228,10 @@ try {
     seven.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            if(res==1)
+            {result_tv.setText("");
+            res=0;
+            reset();}
             appendto(7);
 
 
@@ -223,59 +240,98 @@ try {
     eight.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-
-
+            if(res==1) {
+                result_tv.setText("");
+                res = 0;
+                reset();
+            }
             appendto(8);
         }
     });
     nine.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-
-            appendto(9);
+            if(res==1) {
+                result_tv.setText("");
+                res = 0;
+                reset();
+            } appendto(9);
         }
     });
     five.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-
+            if(res==1) {
+                result_tv.setText("");
+                res = 0;
+                reset();
+            }
             appendto(5);
         }
     });
     four.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            appendto(4);
+            if(res==1) {
+                result_tv.setText("");
+                res = 0;
+                reset();
+            }
+
+                appendto(4);
         }
     });
     six.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            appendto(6);
+            if(res==1) {
+                result_tv.setText("");
+                res = 0;
+                reset();
+            }
+                appendto(6);
         }
     });
     one.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            appendto(1);
+            if(res==1) {
+                result_tv.setText("");
+                res = 0;
+                reset();
+            }
+                appendto(1);
         }
     });
     two.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            appendto(2);
+            if(res==1) {
+                result_tv.setText("");
+                res = 0;
+                reset();
+            } appendto(2);
         }
     });
     three.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            appendto(3);
+            if(res==1) {
+                result_tv.setText("");
+                res = 0;
+                reset();
+            } appendto(3);
         }
     });
     zero.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            appendto(0);
+            if(res==1) {
+                result_tv.setText("");
+                res = 0;
+                reset();
+            }
+                appendto(0);
         }
     });
 
@@ -301,7 +357,7 @@ try {
 
 }catch (Exception a){
     reset();
-    Toast.makeText(this,a.toString(),Toast.LENGTH_SHORT).show();
+    //Toast.makeText(this,a.toString(),Toast.LENGTH_SHORT).show();
 }
 }
 
@@ -312,7 +368,7 @@ try {
         str2="";
         result_tv.setText("");
         temp=0;
-        Toast.makeText(this,"reset",Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this,"reset",Toast.LENGTH_SHORT).show();
 
 
     }
@@ -342,8 +398,10 @@ private void appendto(Integer c){
 
     public void evaluate() {
         try {
+            res=1;
             temp = 0;
             result_tv.setTextColor(getResources().getColor(R.color.color_light_green));
+            op_tv.setText("");
 
             switch (op) {
                 case "+": {
@@ -376,10 +434,11 @@ private void appendto(Integer c){
                         str2 = "";
                     } else {
                         Toast.makeText(this, "CANNOT DIVIDE BY ZERO!", Toast.LENGTH_LONG).show();
-                        temp = 1;
+                        reset();
                     }
                 }
                 break;
+
             }
 
 

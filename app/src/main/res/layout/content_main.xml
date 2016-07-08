@@ -16,7 +16,35 @@
     android:weightSum="1"
     android:background="@color/color_background">
 
-    <EditText
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.09"
+        android:orientation="horizontal">
+        <TextView
+            android:gravity="bottom"
+            android:textStyle="bold"
+            android:layout_width="205dp"
+            android:layout_height="match_parent"
+            android:id="@+id/op"
+            android:textAlignment="viewStart"
+            android:textDirection="anyRtl"
+            android:textSize="25sp"
+            android:layout_weight="1"
+            android:layout_gravity="right"
+            android:text="         Operator:" />
+        <TextView
+            android:layout_width="205dp"
+            android:layout_height="match_parent"
+            android:id="@+id/operator_View"
+            android:textAlignment="viewEnd"
+            android:textDirection="anyRtl"
+            android:textSize="25sp"
+            android:layout_weight="1"
+            android:layout_gravity="right" />
+    </LinearLayout>
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.9"
@@ -25,7 +53,7 @@
         android:textAlignment="viewEnd"
         android:textDirection="anyRtl"
         android:textSize="45sp"
-        android:gravity="bottom"></EditText>
+        android:gravity="bottom"/>
 
     <TableLayout
         android:layout_width="match_parent"
